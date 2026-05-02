@@ -1,0 +1,111 @@
+
+
+ 
+ 
+P  R  O  F  E S  S  I  O  N  A  L     S  U  M  M  A  R  Y 
+ 
+AI-Forward Front-End Engineer with 3+ years delivering enterprise applications — from pixel-perfect React/Next.js frontends to robust 
+.NET  Core  APIs  and  optimized  SQL  Server  databases.  Built  and  shipped  100+  features  across  HRM,  ERP,  and  real-time  Production 
+Tracking systems at scale. Specialized in building scalable frontend architectures, reusable component systems, and high-performance 
+UI experiences, designing EF Core data models, and writing complex SQL queries. Actively building AI-assisted workflows using Vercel 
+AI SDK and OpenAI APIs. Implementing prompt-driven UI features and exploring LLM-powered user experiences. Leveraging AI tools 
+like Cursor and Claude Desktop for rapid development, debugging, and architecture decisions. 
+ 
+ 
+T  E  C  H  N  I  C  A  L    S  K  I  L  L S 
+ 
+Frontend ★ React.js  ·  Next.js  ·  TypeScript  ·  JavaScript (ES2022+)  ·  Vue.js  ·  HTML5  ·  CSS3 
+State & Data Redux Toolkit  ·  Zustand  ·  React Query  ·  SWR  ·  Context API 
+Styling Tailwind CSS  ·  MUI / Ant Design  ·  Bootstrap  ·  Figma → code 
+Backend ★ .NET Core (Clean Architecture)  ·  Entity Framework Core  ·  Node.js  ·  REST APIs 
+Database ★ SQL Server (schema design, query & index optimization)  ·  MySQL   
+AI / Dev Vercel AI SDK  ·   OpenAI API  ·  Claude Desktop  ·  Cursor  ·  ChatGPT 
+Tooling Git & GitHub  ·  Cypress  ·  Postman  ·  Figma 
+ 
+ 
+E  X  P  E  R  I  E  N  C  E 
+ 
+Software Engineer 
+Ha-Meem Group 
+Oct 2024 – Present 
+Tejgaon, Dhaka 
+Portal 360 — enterprise HR & Admin suite · React.js · Next.js · TypeScript · .NET Core · SQL Server 
+▸ Architected and delivered 100+ features across HRM, Recruitment, KPI, ESS, and Production Tracking as lead full-stack engineer. 
+▸ Built Organogram system with hierarchical drag-and-drop UI in React/TypeScript and EF Core–backed hierarchy APIs. 
+▸ Built reusable frontend components and scalable UI architectures across multiple modules. 
+▸ Optimized rendering performance using memoization, lazy loading, and efficient state management 
+▸ Designed Recruitment module end-to-end: React multi-step forms, Redux state, .NET Core approval workflow APIs, and SQL Server 
+schema. 
+▸ 30%  faster  dashboard  load  time — optimized React  Query  caching,  lazy  loading,  and  EF  Core  LINQ  queries  with  SQL  Server  index 
+tuning. 
+▸ Delivered Product  Tracking  System  (PTS)  with Vue.js dashboards,  QR-code  tagging,  real-time  analytics,  and  .NET  Core  +  SQL Server 
+backend. 
+▸ Converted 50+ Figma screens to pixel-perfect, fully responsive interfaces using Tailwind CSS and Ant Design. 
+▸ Integrated AI-assisted development workflows using Cursor and Claude to accelerate development, debugging, and architecture 
+decisions; actively building AI features using Vercel AI SDK and OpenAI APIs. 
+▸ Implemented unit and E2E testing using Jest and Cypress 
+Saif Iqbal 
+AI-Forward Front-End Engineer · React.js · Next.js · TypeScript 
+Full-Stack Experience with .NET Core 
+ 01992924645   ✉ saaifiqbal@gmail.com    Dhaka, Bangladesh 
+linkedin.com/in/saif-iqbal-0640a0275   github.com/saaifiqbal 
+ 
+⚛  React / Next.js   TypeScript ⚙  .NET Core & EF Core   SQL Server   AI-Driven Dev 
+
+ 
+Junior Software Engineer 
+Fort International Ltd 
+Nov 2022 – Oct 2024 
+Elephant Road, Dhaka 
+EnterCount Accounting ERP (React · Node.js · .NET Core) · Pulse360 Hospital Management (Laravel · jQuery) 
+▸ Built POS system frontend with React + Redux and REST API backend in .NET Core + EF Core — improved transaction speed by 20%. 
+▸ Designed  and  optimised  SQL  Server schemas  for  accounting,  inventory,  and billing modules; wrote complex  stored procedures and 
+LINQ queries. 
+▸ Enhanced invoice accuracy by 15% through frontend validation and automated .NET Core backend workflows. 
+▸ Revamped patient admission/discharge workflows in Pulse360 (Laravel + jQuery) — cut processing time by 25%. 
+▸ Integrated Firebase for real-time product and transaction tracking across the ERP frontend. 
+▸ Built SEO-optimised landing pages with Next.js following Core Web Vitals and performance best practices. 
+ 
+ 
+K  E  Y     P  R  O  J  E  C  T  S 
+ 
+Portal 360 – HR & Admin Suite 
+portal.hameemgroup.com 
+Enterprise HRM platform — Recruitment, ESS, PMS, KPI, and Organogram modules. 
+▸ React.js + TypeScript frontend; Redux state management; role-based access and real-time KPI routing. 
+▸ .NET Core (Clean Architecture) APIs + EF Core; SQL Server with optimised indexes for complex HR reporting. 
+▸ 30% dashboard load time reduction through React Query caching and EF Core query tuning. 
+ 
+Ha-Meem Career Portal 
+jobs.hameemgroup.com  
+End-to-end recruitment portal for Ha-Meem Group — job listings, applications, and candidate tracking. 
+▸ Built with Next.js (App Router) + TypeScript frontend; multi-step application forms with file upload and real-time status tracking. 
+▸ .NET Core REST APIs with role-based access control; SQL Server schema for applicant, job, and interview data. 
+▸ Categorized job listings (HR, IT, Finance, Operations, and more) with automated email notifications at each application stage. 
+ 
+Product Tracking System (PTS) 
+pts.hameemgroup.com 
+Real-time garment tracking — cutting to final QC — powered by QR codes. 
+▸ Vue.js dashboards for cutting, sewing, and finishing lines with live KPIs and garment history. 
+▸ .NET Core + EF Core backend; SQL Server optimised for real-time factory-floor analytics. 
+▸ QR-code generation, bundle tagging, and rack/bin management in one unified workflow. 
+ 
+EnterCount Accounting ERP 
+entercount.com 
+Full-featured ERP for accounting, inventory, and billing. 
+▸ Full-stack: React + Redux frontend · .NET Core + EF Core APIs · SQL Server database. 
+▸ POS system — 20% faster transactions; automated invoicing — 15% accuracy improvement. 
+▸ Firebase real-time integration for product and transaction tracking. 
+ 
+ 
+ 
+E  D  U  C  A  T  I  O  N 
+ 
+BSc in Computer Science & Engineering 
+Bangladesh University of Business and Technology 
+CGPA 3.32 / 4.0  ·  2022 – 2025 
+ 
+Diploma in Computer Technology 
+Magura Polytechnic Institute 
+GPA 3.46 / 4.0  ·  2016 – 2021 
+ 
