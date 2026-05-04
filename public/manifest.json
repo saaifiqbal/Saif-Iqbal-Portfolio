@@ -1,0 +1,16 @@
+{
+  "name": "Saif Iqbal Portfolio",
+  "short_name": "Saif Iqbal",
+  "description": "AI-Forward Full-Stack Engineer with 3+ years building enterprise applications. Expert in React.js, Next.js, TypeScript, .NET Core, and SQL Server.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

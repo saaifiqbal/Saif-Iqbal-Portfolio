@@ -1,8 +1,8 @@
 "use client"
 
 import { motion, useInView } from "framer-motion"
-import { useRef, useState } from "react"
-import { Mail, Phone, MapPin, Github, Linkedin, Send, Sparkles } from "lucide-react"
+import { useRef, useState, FormEvent } from "react"
+import { Mail, Phone, MapPin, Github, Linkedin, Send, Sparkles, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { TextReveal } from "@/components/text-reveal"
 import { MagneticButton } from "@/components/magnetic-button"
@@ -51,6 +51,53 @@ export function ContactSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
   const [focusedField, setFocusedField] = useState<string | null>(null)
   const [hoveredContact, setHoveredContact] = useState<number | null>(null)
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  })
+  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setErrorMessage(null)
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to send message")
+      }
+
+      setIsSubmitted(true)
+      setFormData({ name: "", email: "", subject: "", message: "" })
+
+      // Reset success state after 5 seconds
+      setTimeout(() => setIsSubmitted(false), 5000)
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : "Failed to send message. Please try again.")
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
   return (
     <section id="contact" className="py-24 relative overflow-hidden">
@@ -243,87 +290,141 @@ export function ContactSection() {
                 <h3 className="text-xl font-semibold text-foreground mb-6">
                   Send a Message
                 </h3>
-                <form className="space-y-6">
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    {[
-                      { id: "name", label: "Name", type: "text", placeholder: "Your name" },
-                      { id: "email", label: "Email", type: "email", placeholder: "your@email.com" },
-                    ].map((field) => (
+                {isSubmitted ? (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="flex flex-col items-center justify-center py-12 text-center"
+                  >
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ type: "spring", delay: 0.1 }}
+                      className="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center mb-4"
+                    >
+                      <CheckCircle className="w-8 h-8 text-green-500" />
+                    </motion.div>
+                    <h4 className="text-xl font-semibold text-foreground mb-2">Message Sent!</h4>
+                    <p className="text-muted-foreground">
+                      Thank you for reaching out. I&apos;ll get back to you as soon as possible.
+                    </p>
+                  </motion.div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    {errorMessage && (
                       <motion.div
-                        key={field.id}
-                        className="relative"
-                        animate={focusedField === field.id ? { scale: 1.02 } : { scale: 1 }}
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 text-sm"
                       >
-                        <label htmlFor={field.id} className="block text-sm font-medium text-foreground mb-2">
-                          {field.label}
+                        {errorMessage}
+                      </motion.div>
+                    )}
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <motion.div
+                        className="relative"
+                        animate={focusedField === "name" ? { scale: 1.02 } : { scale: 1 }}
+                      >
+                        <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+                          Name <span className="text-red-500">*</span>
                         </label>
-                        <motion.input
-                          type={field.type}
-                          id={field.id}
-                          name={field.id}
+                        <input
+                          type="text"
+                          id="name"
+                          name="name"
+                          required
+                          value={formData.name}
+                          onChange={handleInputChange}
                           className="w-full px-4 py-3 rounded-lg bg-background border border-input focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-foreground"
-                          placeholder={field.placeholder}
-                          onFocus={() => setFocusedField(field.id)}
+                          placeholder="Your name"
+                          onFocus={() => setFocusedField("name")}
                           onBlur={() => setFocusedField(null)}
-                          whileFocus={{ boxShadow: "0 0 20px rgba(var(--primary), 0.2)" }}
                         />
                       </motion.div>
-                    ))}
-                  </div>
-                  <motion.div
-                    animate={focusedField === "subject" ? { scale: 1.02 } : { scale: 1 }}
-                  >
-                    <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
-                      Subject
-                    </label>
-                    <motion.input
-                      type="text"
-                      id="subject"
-                      name="subject"
-                      className="w-full px-4 py-3 rounded-lg bg-background border border-input focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-foreground"
-                      placeholder="What is this about?"
-                      onFocus={() => setFocusedField("subject")}
-                      onBlur={() => setFocusedField(null)}
-                      whileFocus={{ boxShadow: "0 0 20px rgba(var(--primary), 0.2)" }}
-                    />
-                  </motion.div>
-                  <motion.div
-                    animate={focusedField === "message" ? { scale: 1.02 } : { scale: 1 }}
-                  >
-                    <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                      Message
-                    </label>
-                    <motion.textarea
-                      id="message"
-                      name="message"
-                      rows={5}
-                      className="w-full px-4 py-3 rounded-lg bg-background border border-input focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none text-foreground"
-                      placeholder="Your message..."
-                      onFocus={() => setFocusedField("message")}
-                      onBlur={() => setFocusedField(null)}
-                      whileFocus={{ boxShadow: "0 0 20px rgba(var(--primary), 0.2)" }}
-                    />
-                  </motion.div>
-                  <MagneticButton className="w-full">
-                    <Button type="submit" size="lg" className="w-full group relative overflow-hidden">
-                      <motion.span
-                        className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary-foreground/20 to-primary/0"
-                        initial={{ x: "-100%" }}
-                        whileHover={{ x: "100%" }}
-                        transition={{ duration: 0.5 }}
+                      <motion.div
+                        className="relative"
+                        animate={focusedField === "email" ? { scale: 1.02 } : { scale: 1 }}
+                      >
+                        <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                          Email <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          required
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          className="w-full px-4 py-3 rounded-lg bg-background border border-input focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-foreground"
+                          placeholder="your@email.com"
+                          onFocus={() => setFocusedField("email")}
+                          onBlur={() => setFocusedField(null)}
+                        />
+                      </motion.div>
+                    </div>
+                    <motion.div
+                      animate={focusedField === "subject" ? { scale: 1.02 } : { scale: 1 }}
+                    >
+                      <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
+                        Subject
+                      </label>
+                      <input
+                        type="text"
+                        id="subject"
+                        name="subject"
+                        value={formData.subject}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 rounded-lg bg-background border border-input focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-foreground"
+                        placeholder="What is this about?"
+                        onFocus={() => setFocusedField("subject")}
+                        onBlur={() => setFocusedField(null)}
                       />
-                      <span className="relative flex items-center justify-center gap-2">
-                        Send Message
+                    </motion.div>
+                    <motion.div
+                      animate={focusedField === "message" ? { scale: 1.02 } : { scale: 1 }}
+                    >
+                      <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
+                        Message <span className="text-red-500">*</span>
+                      </label>
+                      <textarea
+                        id="message"
+                        name="message"
+                        rows={5}
+                        required
+                        value={formData.message}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 rounded-lg bg-background border border-input focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none text-foreground"
+                        placeholder="Your message..."
+                        onFocus={() => setFocusedField("message")}
+                        onBlur={() => setFocusedField(null)}
+                      />
+                    </motion.div>
+                    <MagneticButton className="w-full">
+                      <Button 
+                        type="submit" 
+                        size="lg" 
+                        className="w-full group relative overflow-hidden"
+                        disabled={isSubmitting}
+                      >
                         <motion.span
-                          animate={{ x: [0, 5, 0] }}
-                          transition={{ duration: 1.5, repeat: Infinity }}
-                        >
-                          <Send className="h-4 w-4" />
-                        </motion.span>
-                      </span>
-                    </Button>
-                  </MagneticButton>
-                </form>
+                          className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary-foreground/20 to-primary/0"
+                          initial={{ x: "-100%" }}
+                          whileHover={{ x: "100%" }}
+                          transition={{ duration: 0.5 }}
+                        />
+                        <span className="relative flex items-center justify-center gap-2">
+                          {isSubmitting ? "Opening Email..." : "Send Message"}
+                          <motion.span
+                            animate={{ x: [0, 5, 0] }}
+                            transition={{ duration: 1.5, repeat: Infinity }}
+                          >
+                            <Send className="h-4 w-4" />
+                          </motion.span>
+                        </span>
+                      </Button>
+                    </MagneticButton>
+                  </form>
+                )}
               </div>
             </motion.div>
           </motion.div>
